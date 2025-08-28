@@ -6,7 +6,6 @@ import (
 	"time"
 )
 
-// quickSort реализует алгоритм быстрой сортировки для среза целых чисел
 func quickSort(arr []int) {
 	if len(arr) < 2 {
 		return
