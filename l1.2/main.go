@@ -11,10 +11,10 @@ func main() {
 
 	wg.Add(5)
 	for _, v := range mas {
-		go func(v int) {
+		go func() {
 			fmt.Println(v * v)
 			wg.Done()
-		}(v)
+		}()
 	}
 	wg.Wait()
 }
