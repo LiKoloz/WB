@@ -16,3 +16,18 @@ func main() {
 
 	fmt.Println(new_strs)
 }
+
+// TakeSet - создание уникального множетсва
+func TakeSet(mas []string) []string {
+	var (
+		set = make([]string, 0)
+		m   = make(map[string]struct{})
+	)
+	for _, s := range mas {
+		if _, e := m[s]; !e {
+			set = append(set, s)
+			m[s] = struct{}{}
+		}
+	}
+	return set
+}
