@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"os"
 	"runtime"
 	"sync"
 	"time"
@@ -83,7 +84,7 @@ func main() {
 		defer wg.Done()
 		for i := range num {
 			if i == 5 {
-				return
+				os.Exit(0)
 			}
 			fmt.Println(i * i)
 		}

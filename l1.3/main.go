@@ -11,13 +11,13 @@ func main() {
 	fmt.Scan(&num)
 
 	for i := range num {
-		go func(i int, ch <-chan bool) {
+		go func() {
 			for {
 				var a = <-ch
 
 				fmt.Println("Горутина ", i, " получила данные из канала: ", a)
 			}
-		}(i, ch)
+		}()
 	}
 
 	for {
