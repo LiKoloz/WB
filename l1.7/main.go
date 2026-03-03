@@ -6,33 +6,53 @@ import (
 	"time"
 )
 
+// ConcMap - асинхронная MAP
+type ConcMap struct {
+	mutex sync.Mutex
+	mapa  map[int]int
+}
+
+// Add - добавление в ассинхронную MAP
+func (concmap *ConcMap) Add(i int) {
+	concmap.mutex.Lock()
+	if _, e := concmap.mapa[i]; e {
+		panic("Int exist!")
+	}
+	concmap.mapa[i] = i * i
+	time.Sleep(1 * time.Second)
+	concmap.mutex.Unlock()
+}
 func main() {
 	var (
-		mut      sync.Mutex
 		wg       sync.WaitGroup
-		mapa     = make(map[int]int)
 		counters sync.Map
 	)
-	wg.Add(5)
-	for i := range 5 {
-		go func() {
-			defer wg.Done()
-			mut.Lock()
-			time.Sleep(1 * time.Second)
-			mapa[i] = i * i
-			mut.Unlock()
-		}()
-	}
+	// Cинхронная MAP
+	{
+		wg.Add(5)
+		concmap := ConcMap{
+			mutex: sync.Mutex{},
+			mapa:  make(map[int]int),
+		}
+		for i := range 5 {
+			go func() {
+				concmap.Add(i)
+				defer wg.Done()
+			}()
+		}
 
-	wg.Wait()
-	for j, v := range mapa {
-		fmt.Println(j, " - ", v)
+		wg.Wait()
+		for j, v := range concmap.mapa {
+			fmt.Println(j, " - ", v)
+		}
 	}
-
-	for i := range 5 {
-		go func() {
-			time.Sleep(1 * time.Second)
-			counters.Store(i, i*i)
-		}()
+	// Ассинхронная MAP
+	{
+		for i := range 5 {
+			go func() {
+				time.Sleep(1 * time.Second)
+				counters.Store(i, i*i)
+			}()
+		}
 	}
 }
