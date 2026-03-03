@@ -10,6 +10,9 @@ type Human struct {
 func (h Human) SayHello() {
 	fmt.Println("Hello ", h.name)
 }
+func (h Human) GetHello() string {
+	return "Hello " + h.name
+}
 
 type Action struct {
 	Human
