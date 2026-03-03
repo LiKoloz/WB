@@ -19,3 +19,20 @@ func main() {
 
 	fmt.Println(c)
 }
+
+// CrossingSlices - получение пересечений
+func CrossingSlices(a []int, b []int) []int {
+	var (
+		c = make([]int, 0)
+		d = make(map[int]struct{})
+	)
+	for _, v := range a {
+		d[v] = struct{}{}
+	}
+	for _, v := range b {
+		if _, e := d[v]; e {
+			c = append(c, v)
+		}
+	}
+	return c
+}
