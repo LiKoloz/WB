@@ -1,13 +1,11 @@
 package main
 
-import "fmt"
+// SetBit - устанавливает i-й бит числа n в 1
+func SetBit(n int64, i uint) int64 {
+	return n | (1 << i)
+}
 
-func main() {
-	// Установка первого бита в 1: 110 | 001 = 111
-	a := 6 | 1
-	fmt.Println(a)
-
-	// Установка первого бита в 0: 111 | 110 = 110
-	b := 7 & 6
-	fmt.Println(b)
+// ClearBit -  устанавливает i-й бит числа n в 0
+func ClearBit(n int64, i uint) int64 {
+	return n & ^(1 << i)
 }
