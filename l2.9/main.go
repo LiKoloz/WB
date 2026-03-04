@@ -37,17 +37,17 @@ import (
 	"strconv"
 )
 
-func unpacking_string(str string) (string, error) {
+func unpackingString(str string) (string, error) {
 	result := ""
 
 	var (
-		ch       string
-		num      int64 = 1
-		flag           = false
-		flag_num       = false
+		ch      string
+		num     int64 = 1
+		flag          = false
+		flagNum       = false
 	)
 	for i := 0; i < len(str); i++ {
-		if str[i] >= '0' && str[i] <= '9' && !flag_num {
+		if str[i] >= '0' && str[i] <= '9' && !flagNum {
 
 			num, _ = strconv.ParseInt(string(str[i]), 10, 0)
 			flag = false
@@ -55,15 +55,15 @@ func unpacking_string(str string) (string, error) {
 			if i == len(str)-1 {
 				return "", errors.New("Unval. str")
 			}
-			flag_num = true
+			flagNum = true
 			ch = string(str[i+1])
-			i += 1
+			i++
 			num = 1
 		} else {
 
 			num = 1
 			ch = string(str[i])
-			flag_num = false
+			flagNum = false
 		}
 		if !flag || num == 1 {
 			for range num {
@@ -75,7 +75,7 @@ func unpacking_string(str string) (string, error) {
 	}
 	if result != "" {
 		return result, nil
-	} else {
-		return "", errors.New("Res string is empty!")
 	}
+	return "", errors.New("res string is empty")
+
 }
