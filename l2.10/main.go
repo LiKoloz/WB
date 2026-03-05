@@ -25,7 +25,6 @@ func main() {
 	str := strings.TrimSpace(input)
 
 	a := strings.Split(str, " ")
-	fmt.Println(a)
 	flags := a[1]
 
 	var isK, isN, isR, isU, isM, isC, isH bool
@@ -64,7 +63,6 @@ func main() {
 			a = a[2:]
 		}
 
-		fmt.Println("aA ", a)
 		if isN {
 			QuickSortByHash(a)
 		}
@@ -75,7 +73,6 @@ func main() {
 			a = SortByMonth(a)
 		}
 		if isH {
-			fmt.Println("isH")
 			a = SortByBites(a)
 		}
 		if isR {
@@ -630,12 +627,6 @@ func SortByBites(strs []string) []string {
 	wg.Wait()
 
 	wg.Add(5)
-
-	gbMasInt = make([]int, 0)
-	mbMasInt = make([]int, 0)
-	kbMasInt = make([]int, 0)
-	BMasInt = make([]int, 0)
-	bMasInt = make([]int, 0)
 
 	go BubbleSort(gbMasInt, &wg)
 	go BubbleSort(mbMasInt, &wg)
