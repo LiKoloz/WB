@@ -46,42 +46,42 @@ func main() {
 		case 'h':
 			isH = true
 		}
-		if isC {
-			b := IsSorted(a)
-			if b != nil {
-				panic(b)
-			} else {
-				fmt.Println("sorted")
-			}
+	}
+	if isC {
+		b := IsSorted(a)
+		if b != nil {
+			panic(b)
 		} else {
-			if isK {
-				a = a[3:]
-				k := a[2]
-				b, _ := strconv.Atoi(k)
-				QuickSortByColumn(a, b)
-			} else {
-				a = a[2:]
-			}
-
-			if isN {
-				QuickSortByHash(a)
-			}
-			if isU {
-				a = TakeUnique(a)
-			}
-			if isM {
-				a = SortByMonth(a)
-			}
-			if isH {
-				a = SortByBites(a)
-			}
-			if isR {
-				Reverse(a)
-			}
+			fmt.Println("sorted")
+		}
+	} else {
+		if isK {
+			a = a[3:]
+			k := a[2]
+			b, _ := strconv.Atoi(k)
+			QuickSortByColumn(a, b)
+		} else {
+			a = a[2:]
 		}
 
+		fmt.Println("aA ", a)
+		if isN {
+			QuickSortByHash(a)
+		}
+		if isU {
+			a = TakeUnique(a)
+		}
+		if isM {
+			a = SortByMonth(a)
+		}
+		if isH {
+			fmt.Println("isH")
+			a = SortByBites(a)
+		}
+		if isR {
+			Reverse(a)
+		}
 	}
-
 	fmt.Println(a)
 }
 
