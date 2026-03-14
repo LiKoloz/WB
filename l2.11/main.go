@@ -6,6 +6,7 @@ import (
 	"strings"
 )
 
+// getAnagramms - получение аннаграмм
 func getAnagramms(strs []string) map[string][]string {
 	groups := make(map[string][]string)
 
